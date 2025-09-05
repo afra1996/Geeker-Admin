@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import type { FUniver, Univer } from "@univerjs/presets";
 import { UniverSheetsCorePreset } from "@univerjs/preset-sheets-core";
-import UniverPresetSheetsCoreZhCN from "@univerjs/preset-sheets-core/locales/zh-CN";
+import UniverPresetSheetsCoreZhCN from "@univerjs/preset-sheets-core/lib/locales/zh-CN.js";
 import { createUniver, LocaleType, mergeLocales } from "@univerjs/presets";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
