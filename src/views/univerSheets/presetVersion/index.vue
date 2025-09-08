@@ -5,11 +5,13 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import type { FUniver, Univer } from "@univerjs/presets";
 import { UniverSheetsCorePreset } from "@univerjs/preset-sheets-core";
-import UniverPresetSheetsCoreZhCN from "@univerjs/preset-sheets-core/lib/locales/zh-CN.js";
+import sheetsCoreZhCN from "@univerjs/preset-sheets-core/lib/locales/zh-CN.js";
 import { createUniver, LocaleType, mergeLocales } from "@univerjs/presets";
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { FUNCTION_LIST_USER, functionZhCN, functionUser } from "./custom-function";
+import { WORKBOOK_DATA } from "./data";
 
 import "@univerjs/preset-sheets-core/lib/index.css";
 
@@ -22,16 +24,20 @@ onMounted(() => {
   const { univer, univerAPI } = createUniver({
     locale: LocaleType.ZH_CN,
     locales: {
-      [LocaleType.ZH_CN]: mergeLocales(UniverPresetSheetsCoreZhCN)
+      [LocaleType.ZH_CN]: mergeLocales(sheetsCoreZhCN, functionZhCN)
     },
     presets: [
       UniverSheetsCorePreset({
-        container: container.value as HTMLElement
+        container: container.value as HTMLElement,
+        formula: {
+          function: functionUser,
+          description: FUNCTION_LIST_USER
+        }
       })
     ]
   });
 
-  univerAPI.createWorkbook({});
+  univerAPI.createWorkbook(WORKBOOK_DATA);
 
   univerInstance = univer;
   univerAPIInstance = univerAPI;
