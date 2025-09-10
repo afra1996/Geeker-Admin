@@ -26,7 +26,7 @@ onMounted(async () => {
         UniverSheetsCorePreset({
           container: container.value as HTMLElement,
           sheets: {
-            protectedRangeShadow: false
+            protectedRangeShadow: true
           }
         })
       ]
@@ -37,33 +37,19 @@ onMounted(async () => {
 
     // 实现保护区域功能，只保护特定区域（A1:F6），其他区域可编辑
     const workbook = univerAPI.getActiveWorkbook();
-    const permission = workbook?.getPermission();
+    const permission = workbook?.getPermission()
     if (permission) {
-      const sheet = workbook.getActiveSheet();
-      const unitId = workbook.getId();
-      const subUnitId = sheet.getSheetId();
+      const unitId = workbook.getId()
+      const subUnitId = workbook.getActiveSheet().getSheetId()
+      const worksheetEditPermission = permission.permissionPointsDefinition.WorksheetEditPermission
 
-      const range1 = sheet.getRange("A1:B3");
-      const range2 = sheet.getRange("C4:D5");
-      const ranges = [range1, range2];
-
-      const rangeProtectionPermissionEditPoint = permission.permissionPointsDefinition.RangeProtectionPermissionEditPoint;
-      const res = await permission.addRangeBaseProtection(unitId, subUnitId, ranges);
-      // 这里的返回区别于工作表权限，因为一个子表中可能会有多个区域保护，所以 ruleId 是用来存储该权限规则的唯一 id，permissionId 是用来拼接权限点位的。
-      const { permissionId } = res;
-
-      permission.rangeRuleChangedAfterAuth$.subscribe(currentPermissionId => {
-        if (currentPermissionId === permissionId) {
-          // 设置范围保护为不可编辑
-          permission.setRangeProtectionPermissionPoint(
-            unitId,
-            subUnitId,
-            permissionId,
-            rangeProtectionPermissionEditPoint,
-            false
-          );
-        }
-      });
+      permission.addWorksheetBasePermission(unitId, subUnitId).then((permissionId) => {
+        permission.sheetRuleChangedAfterAuth$.subscribe((currentPermissionId) => {
+          if (currentPermissionId === permissionId) {
+            permission.setWorksheetPermissionPoint(unitId, subUnitId, worksheetEditPermission, false)
+          }
+        })
+      })
     }
   }
 });
