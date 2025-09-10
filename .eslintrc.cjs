@@ -20,7 +20,7 @@ module.exports = {
     }
   },
   // 继承某些已有的规则
-  extends: ["plugin:vue/vue3-recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+  extends: ["plugin:vue/vue3-recommended", "plugin:@typescript-eslint/recommended"],
   /**
    * "off" 或 0    ==>  关闭规则
    * "warn" 或 1   ==>  打开的规则作为警告（不影响代码执行）
@@ -57,5 +57,15 @@ module.exports = {
     "vue/require-default-prop": "off", // 此规则要求为每个 prop 为必填时，必须提供默认值
     "vue/multi-word-component-names": "off", // 要求组件名称始终为 “-” 链接的单词
     "vue/no-setup-props-destructure": "off" // 禁止解构 props 传递给 setup
-  }
+  },
+   // 确保包含这个配置
+  overrides: [
+    {
+      files: ["*.ts", "*.tsx", "*.mts", "*.cts", "*.vue"],
+      parserOptions: {
+        parser: "@typescript-eslint/parser",
+        extraFileExtensions: [".vue"]
+      }
+    }
+  ]
 };
