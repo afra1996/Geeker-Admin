@@ -70,12 +70,77 @@
           }
         },
         {
-          "path": "/univerSheets/permission",
-          "name": "permission",
-          "component": "/univerSheets/permission/index",
+          "path": "/univerSheets/allPermission",
+          "name": "allPermission",
+          "component": "/univerSheets/allPermission/index",
           "meta": {
             "icon": "Menu",
-            "title": "权限表格",
+            "title": "权限表格-整体",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false
+          }
+        },
+        {
+          "path": "/univerSheets/rangePermission",
+          "name": "rangePermission",
+          "component": "/univerSheets/rangePermission/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "权限表格-选区",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false
+          }
+        },
+        {
+          "path": "/univerSheets/otherPermission",
+          "name": "otherPermission",
+          "component": "/univerSheets/otherPermission/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "第三方权限服务表格",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false
+          }
+        },
+        {
+          "path": "/univerSheets/permissionTest",
+          "name": "permissionTest",
+          "component": "/univerSheets/permissionTest/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "权限服务测试",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false
+          }
+        },
+        {
+          "path": "/univerSheets/digitalFormat",
+          "name": "digitalFormat",
+          "component": "/univerSheets/digitalFormat/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "数据格式测试",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false
+          }
+        },
+        {
+          "path": "/univerSheets/hyperLink",
+          "name": "hyperLink",
+          "component": "/univerSheets/hyperLink/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "超链接测试",
             "isLink": "",
             "isHide": false,
             "isFull": false,
