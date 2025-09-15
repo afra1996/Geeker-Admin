@@ -27,70 +27,70 @@ let workbook: Workbook | null = null;
 
 onMounted(() => {
   // 定义初始数据
-  const initialData = {
-    id: 'workbook-initial-data',
-    sheetOrder: ['sheet1'],
-    sheets: {
-      'sheet1': {
-        id: 'sheet1',
-        name: 'Sheet1',
-        cellData: {
-          0: { // 第一行 (A1, B1)
-            0: { 
-              v: '姓名', 
-              t: 1,
-              s: { // 样式设置
-                ft: 16, // 字体大小
-                bl: 1,  // 粗体
-                it: 1,  // 斜体
-                ff: 'Arial', // 字体
-                cl: {
-                  rgb: '#FF0000' // 红色字体
-                }
-              }
-            }, // A1
-            1: { 
-              v: '年龄', 
-              t: 1,
-              s: { // 样式设置
-                ft: 14,
-                ul: { // 下划线
-                  s: 1
-                },
-                cl: {
-                  rgb: '#0000FF' // 蓝色字体
-                }
-              }
-            }  // B1
-          },
-          1: { // 第二行 (A2, B2)
-            0: { 
-              v: '张三', 
-              t: 1,
-              s: { // 样式设置
-                bg: {
-                  rgb: '#FFFF00' // 黄色背景
-                },
-                cl: {
-                  rgb: '#000000' // 黑色字体
-                }
-              }
-            }, // A2
-            1: { 
-              v: 25, 
-              t: 2,
-              s: { // 样式设置
-                ft: 18,
-                bg: {
-                  rgb: '#00FF00' // 绿色背景
-                }
-              }
-            }      // B2
-          }
-        }
-      }
-    }
-  };
+  // const initialData = {
+  //   id: 'workbook-initial-data',
+  //   sheetOrder: ['sheet1'],
+  //   sheets: {
+  //     'sheet1': {
+  //       id: 'sheet1',
+  //       name: 'Sheet1',
+  //       cellData: {
+  //         0: { // 第一行 (A1, B1)
+  //           0: { 
+  //             v: '姓名', 
+  //             t: 1,
+  //             s: { // 样式设置
+  //               ft: 16, // 字体大小
+  //               bl: 1,  // 粗体
+  //               it: 1,  // 斜体
+  //               ff: 'Arial', // 字体
+  //               cl: {
+  //                 rgb: '#FF0000' // 红色字体
+  //               }
+  //             }
+  //           }, // A1
+  //           1: { 
+  //             v: '年龄', 
+  //             t: 1,
+  //             s: { // 样式设置
+  //               ft: 14,
+  //               ul: { // 下划线
+  //                 s: 1
+  //               },
+  //               cl: {
+  //                 rgb: '#0000FF' // 蓝色字体
+  //               }
+  //             }
+  //           }  // B1
+  //         },
+  //         1: { // 第二行 (A2, B2)
+  //           0: { 
+  //             v: '张三', 
+  //             t: 1,
+  //             s: { // 样式设置
+  //               bg: {
+  //                 rgb: '#FFFF00' // 黄色背景
+  //               },
+  //               cl: {
+  //                 rgb: '#000000' // 黑色字体
+  //               }
+  //             }
+  //           }, // A2
+  //           1: { 
+  //             v: 25, 
+  //             t: 2,
+  //             s: { // 样式设置
+  //               ft: 18,
+  //               bg: {
+  //                 rgb: '#00FF00' // 绿色背景
+  //               }
+  //             }
+  //           }      // B2
+  //         }
+  //       }
+  //     }
+  //   }
+  // };
 
   // const data = {
   //   v: 123456.789,
@@ -113,18 +113,19 @@ onMounted(() => {
     ],
     plugins: [
       // UniverSheetsNumfmtPlugin   // 注册插件
-      // UniverSheetsHyperlinkPlugin // 注册超链接插件
     ]
   });
 
   // 使用初始数据创建工作簿
-  workbook = univerAPI.createWorkbook(initialData);
+  workbook = univerAPI.createWorkbook();
 
-  // // 将 A2 单元格的数字格式设置为 '#,##0.00'
-  // const fRange = fWorksheet.getRange('A2')
-  // fRange.setValue(1234.567).setNumberFormat('#,##0.00')
-  // const res = fRange.getDisplayValue() // 1,234.57
-  // console.log('数字格式化结果:', res)
+  // 将 A2 单元格的数字格式设置为 '#,##0.00'
+  const fWorkbook = univerAPI.getActiveWorkbook()
+  const fWorksheet = fWorkbook.getActiveSheet()
+  const fRange = fWorksheet.getRange('A1')
+  fRange.setValue(1234.567).setNumberFormat('#,##0.00')
+  const res = fRange.getDisplayValue() // 1,234.57
+  console.log('数字格式化结果:', res)
 
   // // 这将在第一行位置后插入一行
   // const sheet = univerAPI.getActiveWorkbook().getActiveSheet();
@@ -201,53 +202,53 @@ onMounted(() => {
   // // 设置行默认样式
   // fworksheet.setRowDefaultStyle(1, defaultRowStyle)
 
-  const fWorkbook = univerAPI.getActiveWorkbook()
-  const fWorksheet = fWorkbook.getActiveSheet()
-  const fRange = fWorksheet.getRange('A1:B2')
-  console.log(fRange.getValue(true))
+  // const fWorkbook = univerAPI.getActiveWorkbook()
+  // const fWorksheet = fWorkbook.getActiveSheet()
+  // const fRange = fWorksheet.getRange('A1:B2')
+  // console.log(fRange.getValue(true))
 
-  // 普通文本单元格示例 (B1)
-  const normalCell = fWorksheet.getRange('B1')
-  normalCell.setValue('普通文本')
-    .setFontSize(14)
-    .setFontColor('#333333')
-    .setBackgroundColor('#f0f0f0')
+  // // 普通文本单元格示例 (B1)
+  // const normalCell = fWorksheet.getRange('B1')
+  // normalCell.setValue('普通文本')
+  //   .setFontSize(14)
+  //   .setFontColor('#333333')
+  //   .setBackgroundColor('#f0f0f0')
   
-  // 整个单元格应用统一的样式
-  console.log('普通文本单元格值:', normalCell.getValue())
+  // // 整个单元格应用统一的样式
+  // console.log('普通文本单元格值:', normalCell.getValue())
   
-  // 富文本单元格示例 (B2)
-  // 创建富文本对象，可以在同一单元格内应用多种样式
-  const richText = univerAPI.newRichText()
-    .insertText('富文本示例: ')
-    .setStyle(0, 6, { 
-      bl: 1,           // 粗体
-      cl: { rgb: '#0066cc' }  // 蓝色
-    })
-    .insertText('红色粗体 ')
-    .setStyle(7, 11, { 
-      bl: 1,           // 粗体
-      cl: { rgb: '#cc0000' }  // 红色
-    })
-    .insertText('斜体绿色')
-    .setStyle(12, 16, { 
-      it: 1,           // 斜体
-      cl: { rgb: '#009900' }  // 绿色
-    })
+  // // 富文本单元格示例 (B2)
+  // // 创建富文本对象，可以在同一单元格内应用多种样式
+  // const richText = univerAPI.newRichText()
+  //   .insertText('富文本示例: ')
+  //   .setStyle(0, 6, { 
+  //     bl: 1,           // 粗体
+  //     cl: { rgb: '#0066cc' }  // 蓝色
+  //   })
+  //   .insertText('红色粗体 ')
+  //   .setStyle(7, 11, { 
+  //     bl: 1,           // 粗体
+  //     cl: { rgb: '#cc0000' }  // 红色
+  //   })
+  //   .insertText('斜体绿色')
+  //   .setStyle(12, 16, { 
+  //     it: 1,           // 斜体
+  //     cl: { rgb: '#009900' }  // 绿色
+  //   })
   
-  // 设置富文本到单元格
-  const richCell = fWorksheet.getRange('B2')
-  if (richCell && typeof richCell.setRichTextValueForCell === 'function') {
-    richCell.setRichTextValueForCell(richText)
-    console.log('富文本设置成功')
-  } else {
-    console.warn('无法设置富文本值')
-  }
+  // // 设置富文本到单元格
+  // const richCell = fWorksheet.getRange('B2')
+  // if (richCell && typeof richCell.setRichTextValueForCell === 'function') {
+  //   richCell.setRichTextValueForCell(richText)
+  //   console.log('富文本设置成功')
+  // } else {
+  //   console.warn('无法设置富文本值')
+  // }
   
-  // 普通文本单元格 - 多种颜色效果（无法实现）(B3)
-  const limitedCell = fWorksheet.getRange('B3')
-  limitedCell.setValue('无法实现多色')
-    .setFontColor('#cc0000') // 只能设置整个单元格为红色
+  // // 普通文本单元格 - 多种颜色效果（无法实现）(B3)
+  // const limitedCell = fWorksheet.getRange('B3')
+  // limitedCell.setValue('无法实现多色')
+  //   .setFontColor('#cc0000') // 只能设置整个单元格为红色
 
   univerInstance = univer;
   univerAPIInstance = univerAPI;
