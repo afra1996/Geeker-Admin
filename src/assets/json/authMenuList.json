@@ -146,6 +146,32 @@
             "isFull": false,
             "isAffix": false
           }
+        },
+        {
+          "path": "/univerSheets/ImportExcel",
+          "name": "ImportExcel",
+          "component": "/univerSheets/ImportExcel/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "导入Excel",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false
+          }
+        },
+        {
+          "path": "/univerSheets/ExportExcel",
+          "name": "ExportExcel",
+          "component": "/univerSheets/ExportExcel/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "导出Excel",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false
+          }
         }
       ]
     },
