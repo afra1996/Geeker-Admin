@@ -17,10 +17,9 @@ import sheetsCoreZhCN from "@univerjs/preset-sheets-core/lib/locales/zh-CN.js";
 import { createUniver, LocaleType, mergeLocales } from "@univerjs/presets";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { ElMessage } from "element-plus";
-import axios from "axios";
+import { mockExportSheetData } from "@/api/modules/univer";
 
 // 引入xlsx库用于导出Excel文件
-// @ts-expect-error: 类型定义问题
 import * as XLSX from "xlsx";
 
 import "@univerjs/preset-sheets-core/lib/index.css";
@@ -173,7 +172,7 @@ const exportExcel = () => {
   }
 };
 
-// 后端导出为Excel文件
+// 模拟后端导出为Excel文件
 const exportExcelBackend = async () => {
   if (!univerAPIInstance || !workbook) {
     ElMessage.error("表格未初始化完成");
@@ -184,16 +183,11 @@ const exportExcelBackend = async () => {
     // 获取当前工作簿数据
     const workbookData = workbook.save() as IWorkbookData;
     
-    // 发送到后端进行处理
-    const response = await axios({
-      method: 'POST',
-      url: '/api/univer/export-excel',
-      data: workbookData,
-      responseType: 'blob' // 关键：指定响应类型为blob
-    });
+    // 调用模拟的后端导出接口
+    const blob = await mockExportSheetData(workbookData);
     
     // 创建下载链接
-    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', `univer-export-${new Date().getTime()}.xlsx`);
