@@ -172,6 +172,45 @@
             "isFull": false,
             "isAffix": false
           }
+        },
+        {
+          "path": "/univerSheets/complexFormulas",
+          "name": "complexFormulas",
+          "component": "/univerSheets/complexFormulas/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "复杂公式示例",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false
+          }
+        },
+        {
+          "path": "/univerSheets/customFormula",
+          "name": "customFormula",
+          "component": "/univerSheets/customFormula/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "自定义公式",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false
+          }
+        },
+        {
+          "path": "/univerSheets/graphSheets",
+          "name": "graphSheets",
+          "component": "/univerSheets/graphSheets/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "图表",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false
+          }
         }
       ]
     },
